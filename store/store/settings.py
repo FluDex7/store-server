@@ -32,7 +32,7 @@ ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-# Установленные приложения [users app & products app, можно ещё корзину как отдельное приложение]
+# Установленные приложения [users app & products app]
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'products',  # добавление приложения
 ]
 # Промежуточные слои
 MIDDLEWARE = [
