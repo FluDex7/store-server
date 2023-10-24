@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Содержит путь до проекта
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -20,16 +21,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# Секретный ключ обеспечивает целостность передачи данных между серверами и между клиентами
 SECRET_KEY = 'django-insecure-6)hy6ucn0czj&tol$ycci&22o2e59@9v_dn@en&xr$pj9w@uxw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# Разрешенные домены, например: 'mysite.com' или '*' для всех доменов
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-
+# Установленные приложения
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
-
+# Промежуточные слои
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -48,9 +51,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+# Расположение url-адресов
 ROOT_URLCONF = 'store.urls'
-
+# Отвечает за отображение шаблонов и их работу
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -66,13 +69,13 @@ TEMPLATES = [
         },
     },
 ]
-
+# Расположение файла wsgi; wsgi и asgi нужны для deploy сервера на production
 WSGI_APPLICATION = 'store.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
+# информация о том, какая база данных используется
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -83,30 +86,30 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
-
+# Валидация для паролей
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
+    },  # должна быть маленькая заглавная буква
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
+    },  # минимум 8 символов
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
+    },  # должен быть уникальным, должен совпадать "введите пароль" и "подтвердите пароль"
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    },  # должна быть цифра (не точно)
 ]
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
-
+# Язык проекта
 LANGUAGE_CODE = 'en-us'
-
+# Тайм-зона
 TIME_ZONE = 'UTC'
-
+# Доп. поля для локализации (для перевода на языки)
 USE_I18N = True
 
 USE_L10N = True
@@ -116,10 +119,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-
+# путь, где хранятся статические файлы (html, css, images, javascript)
 STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
-
+# Поле по умолчанию (для работы с БД)
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
