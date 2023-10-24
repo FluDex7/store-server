@@ -32,7 +32,7 @@ ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-# Установленные приложения
+# Установленные приложения [users app & products app, можно ещё корзину как отдельное приложение]
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
