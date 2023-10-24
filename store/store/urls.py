@@ -16,6 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from products.views import index, products  # Подключение контроллеров файла views.py приложения products
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', index, name='index'),  # передача контроллера осущесвтляется по ссылке(без скобок)
+    path('products', products, name='products'),
+
 ]
