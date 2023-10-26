@@ -55,3 +55,16 @@ QuerrySet - набор запросов, который представляет
 
 Обычно изображения загружают из-вне на сервер (не хранятся на статике),...
     ...на статике хранятся только те, которые нужны для сайта
+
+6. Django Fixtures - json(или xml)-файлы, содержащие структуру БД. В частности, json-это список, в нём несколько словариков, а в них ключи
+    dumpdata - достаёт с БД данные, а loaddata - вносит в БД данные.
+    Нужно для перелокации проекта на другие устройства или сохранение версий БД
+
+    Пример:
+    python .\manage.py dumpdata products.ProductCategory > categories.json
+    т.е dumpdata Приложение.НазваниеМодели > НазваниеФайла Путь(если не указать,
+                                                                             то создаст в корневой папке)
+    python .\manage.py loaddata products/fixtures/categories.json
+    python .\manage.py loaddata products/fixtures/goods.json
+
+
