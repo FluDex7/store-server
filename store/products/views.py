@@ -19,9 +19,9 @@ def index(request):
 def products(request):
     context = {
         'title': 'Store - Каталог',
-        'products': Product.object.all(),  # products = [<QuerySet [<Product: ... | Category: ...>]>,
+        'products': Product.objects.all(),  # products = [<QuerySet [<Product: ... | Category: ...>]>,
                                                        # <QuerySet [<Product: ... | Category: ...>]>,
                                                        # ...]
-        'categories': ProductCategory.object.all(),  # categories = [<QuerySet ['Одежда']>, <QuerySet ['Обувь']>]
+        'categories': ProductCategory.objects.all(),  # categories = [<QuerySet ['Одежда']>, <QuerySet ['Обувь']>]
     }
     return render(request, 'products/products.html', context=context)
