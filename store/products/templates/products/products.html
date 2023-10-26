@@ -58,8 +58,9 @@
                     <div class="card h-100">
                         <a href="#">
                             <img class="card-img-top"
-                                 src="..."
-                                 alt="">
+                                 alt="{{ product.description }}"
+                                 src="{{ product.image.url }}"> <!-- product.image содержит объект, поэтому ссылку
+                                                                    на него можно получить через метод .url   -->
                         </a>
                         <div class="card-body">
                             <h4 class="card-title">
