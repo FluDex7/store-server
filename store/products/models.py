@@ -10,6 +10,9 @@ class ProductCategory(models.Model):
     name = models.CharField(max_length=128, unique=True)  # max_length - обязательный атрибут для типа CharField
     description = models.TextField(null=True, blank=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Product(models.Model):
     name = models.CharField(max_length=256)
