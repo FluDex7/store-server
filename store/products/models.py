@@ -18,6 +18,7 @@ class Product(models.Model):
     quantity = models.PositiveIntegerField(default=0)
     image = models.ImageField(upload_to='products_images')
     category = models.ForeignKey(to=ProductCategory, on_delete=models.CASCADE)
-    # Каскадное удаление - удаление всех связанных данных с данной категорией
-    # models.PROTECT - запретит удалять данные, пока у данной категории есть товары
-    # models.SET_DEFAULT - ставит значение по умолчанию, если категорию удалить
+        # Каскадное удаление - удаление всех связанных данных с данной категорией
+        # models.PROTECT - запретит удалять данные, пока у данной категории есть товары
+        # models.SET_DEFAULT - ставит значение по умолчанию, если категорию удалить
+
