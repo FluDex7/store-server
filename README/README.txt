@@ -32,3 +32,5 @@ HTTP Request(запрос) -> urls.py(проверка на определённ
 
 4. url tags используют имена, которые указываются в файле urls.py
 
+5. Типы для полей таблиц/моделей - https://docs.djangoproject.com/en/4.2/ref/models/fields/
+
