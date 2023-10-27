@@ -14,18 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 # Подключение медиа-файлов
 from django.conf.urls.static import static
 from django.conf import settings  # Так подтягиваются все настройки (в отличие от from store import settings)
 
-from products.views import index, products  # Подключение контроллеров файла views.py приложения products
+from products.views import index  # Подключение контроллеров файла views.py приложения products
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),  # передача контроллера осущесвтляется по ссылке(без скобок)
-    path('products', products, name='products'),
+    path('products/', include('products.urls', namespace='products')),
 ]
 
 # На локальном уровне
