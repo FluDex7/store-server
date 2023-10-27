@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'products',  # добавление приложения
+    'users',
 ]
 # Промежуточные слои
 MIDDLEWARE = [
@@ -135,3 +136,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 # Поле по умолчанию (для работы с БД)
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Users
+AUTH_USER_MODEL = 'user.User'
