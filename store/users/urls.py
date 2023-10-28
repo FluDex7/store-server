@@ -1,11 +1,12 @@
 from django.urls import path
 
-from users.views import login, register, profile  # Подключение контроллеров файла views.py приложения products
+from users.views import login, register, profile, logout  # Подключение контроллеров файла views.py приложения products
 
 app_name = 'users'
 
 urlpatterns = [
     path('login/', login, name='login'),
     path('register/', register, name='register'),
-    path('profile/', profile, name='profile')
+    path('profile/', profile, name='profile'),
+    path('logout/', logout, name='logout')
 ]
