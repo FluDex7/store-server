@@ -56,7 +56,8 @@ QuerrySet - набор запросов, который представляет
 Обычно изображения загружают из-вне на сервер (не хранятся на статике),...
     ...на статике хранятся только те, которые нужны для сайта
 
-6. Django Fixtures - json(или xml)-файлы, содержащие структуру БД. В частности, json-это список, в нём несколько словариков, а в них ключи
+6. Django Fixtures - json(или xml)-файлы, содержащие структуру БД. В частности, json-это список, в нём несколько словариков,
+                                                                                                            ..а в них ключи
     dumpdata - достаёт с БД данные, а loaddata - вносит в БД данные.
     Нужно для перелокации проекта на другие устройства или сохранение версий БД
 
@@ -66,5 +67,19 @@ QuerrySet - набор запросов, который представляет
                                                                              то создаст в корневой папке)
     python .\manage.py loaddata products/fixtures/categories.json
     python .\manage.py loaddata products/fixtures/goods.json
+
+7. Для работы с пользователем используется класс AbstractUser(django.contrib.auth.models)...
+...или наследуемый от него класс, например: User(AbstractUser) созданный в Модели приложения
+Дальше создаётся форма(forms.py), которой передаётся модель класса(AbstractUser или User), уже имеющиеся формы для..
+..работы с пользователем(AuthenticationForm, UserCreationForm, UserChangeForm) и forms(from django), там объявляются поля,..
+..работу с которыми предстоит произвести. (объявляется тип поля(widget=forms.ТипИнпута(аттрибуты)))
+Для изменения данных о пользователе в странице при GET запросе, необходимо отображать данные ПОЛЬЗОВАТЕЛЯ с помощью..
+..ИмяForm(instance=request.user), а при добавлении медиа-файла - Form(instance=request.user,..
+..data=request.POST, files=request.FILES) в обработке POST-запроса
+При успешного заполнения формы пользователя перенаправляют с помощью HttpResponseRedirect(..render, HttpResponseRedirect)..
+.. и from django.urls import reverse.
+Аутентификация пользователя происходит так: user = auth.authenticate(username=username, password=password) с contrib:auth
+
+
 
 
