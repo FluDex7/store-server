@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.urls import reverse  # Принимает name=... и возвращает строку, по которому находиться адрес
 
 from users.models import User
@@ -12,8 +12,8 @@ def login(request):
         if form.is_valid():  # Проверка формы на валидацию
             username = request.POST['username']
             password = request.POST['password']
-            user = auth.authenticate(username=username, password=password) # Аутентификация пользователя
-                                                                           # (проверяет есть ли он в БД)
+            user = auth.authenticate(username=username, password=password)  # Аутентификация пользователя
+            # (проверяет есть ли он в БД)
             if user:  # Если пользователь существует, авторизоваться
                 auth.login(request, user)
                 return HttpResponseRedirect(reverse('index'))  # Перенаправляет на главную страницу, если успешно
@@ -31,6 +31,7 @@ def register(request):
         form = UserRegistrationForm(data=request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Поздравляем! Вы успешно зарегестрировались!')
             return HttpResponseRedirect(reverse('users:login'))
     else:
         form = UserRegistrationForm()

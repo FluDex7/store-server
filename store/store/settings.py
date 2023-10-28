@@ -16,7 +16,6 @@ from pathlib import Path
 # Содержит путь до проекта
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -29,7 +28,6 @@ DEBUG = True
 
 # Разрешенные домены, например: 'mysite.com' или '*' для всех доменов
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 # Установленные приложения [users app & products app]
@@ -75,7 +73,6 @@ TEMPLATES = [
 # Расположение файла wsgi; wsgi и asgi нужны для deploy сервера на production
 WSGI_APPLICATION = 'store.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 # информация о том, какая база данных используется
@@ -85,7 +82,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -105,11 +101,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },  # должна быть цифра (не точно)
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 # Язык проекта
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 # Тайм-зона
 TIME_ZONE = 'UTC'
 # Доп. поля для локализации (для перевода на языки)
@@ -118,7 +113,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
@@ -139,4 +133,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Users
 AUTH_USER_MODEL = 'users.User'
-
