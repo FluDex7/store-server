@@ -68,9 +68,9 @@ QuerrySet - набор запросов, который представляет
     python .\manage.py loaddata products/fixtures/categories.json
     python .\manage.py loaddata products/fixtures/goods.json
 
-7. Для работы с пользователем используется класс AbstractUser(django.contrib.auth.models)...
-...или наследуемый от него класс, например: User(AbstractUser) созданный в Модели приложения
-Дальше создаётся форма(forms.py), которой передаётся модель класса(AbstractUser или User), уже имеющиеся формы для..
+7. Для работы с пользователем используется класс User (django.contrib.auth.models). В случае, если необходимо поменять поле..
+..создаётся модель User(AbstractUser)
+Дальше создаётся форма(forms.py), которой передаётся модель класса(User), уже имеющиеся формы для..
 ..работы с пользователем(AuthenticationForm, UserCreationForm, UserChangeForm) и forms(from django), там объявляются поля,..
 ..работу с которыми предстоит произвести. (объявляется тип поля(widget=forms.ТипИнпута(аттрибуты)))
 Для изменения данных о пользователе в странице при GET запросе, необходимо отображать данные ПОЛЬЗОВАТЕЛЯ с помощью..
@@ -79,6 +79,8 @@ QuerrySet - набор запросов, который представляет
 При успешного заполнения формы пользователя перенаправляют с помощью HttpResponseRedirect(..render, HttpResponseRedirect)..
 .. и from django.urls import reverse.
 Аутентификация пользователя происходит так: user = auth.authenticate(username=username, password=password) с contrib:auth
+Выход пользователя осуществляется при помощи auth.logout(request) и последующем перенаправлением на главную страницу
+Сообщения можно выводить через form.non_field_errors и также через contrib:messages.success('message')
 
 
 
