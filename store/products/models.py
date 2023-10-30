@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 # здесь будет создаватся таблица для БД
 # Модели = таблицы
-
+from users.models import User
 
 class ProductCategory(models.Model):
     # поле = тип
@@ -35,3 +35,13 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукция'
+
+
+class Basket(models.Model):
+    user = models.ForeignKey(to=User, on_delete=models.PROTECT)
+    product = models.ForeignKey(to=Product, on_delete=models.PROTECT)
+    quantity = models.PositiveSmallIntegerField(default=0)
+    created_timestamp = models.DateTimeField(auto_now_add=True)  # Автоматически заполняется
+
+    def __str__(self):
+        return f'Корзина для {self.user.email} | Продукт: {self.product.name}'
