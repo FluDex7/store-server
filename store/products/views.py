@@ -17,12 +17,15 @@ def index(request):
     return render(request, 'products/index.html', context=context)
 
 
-def products(request):
+def products(request, category_id = None):
+    # if category_id:
+    #     products = Product.objects.filter(category_id=category_id)
+    # else:
+    #     products = Product.objects.all()
+
     context = {
         'title': 'Store - Каталог',
-        'products': Product.objects.all(),  # products = [<QuerySet [<Product: ... | Category: ...>]>,
-                                                       # <QuerySet [<Product: ... | Category: ...>]>,
-                                                       # ...]
+        'products': Product.objects.filter(category_id=category_id) if category_id else Product.objects.all(),
         'categories': ProductCategory.objects.all(),  # categories = [<QuerySet ['Одежда']>, <QuerySet ['Обувь']>]
     }
     return render(request, 'products/products.html', context=context)
