@@ -136,3 +136,6 @@ AUTH_USER_MODEL = 'users.User'
 LOGIN_URL = '/users/login/'
 LOGIN_REDIRECT_URL = '/'  # Переадресация после входа в аккаунт
 LOGOUT_REDIRECT_URL = '/' # Переадресация после выхода с аккаунта
+
+# sendings emails               default = .smtp.
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"  # delete before export to production
