@@ -1,6 +1,6 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import HttpResponseRedirect
 from django.views.generic.base import TemplateView
-from django.core.paginator import Paginator
+from django.views.generic.list import ListView
 from django.contrib.auth.decorators import login_required
 from products.models import ProductCategory, Product, Basket  # Подключение таблиц(моделей) и последующая передача..
                                                       # ..в качестве аргумента
@@ -21,19 +21,22 @@ class IndexView(TemplateView):
         return context
 
 
-def products(request, category_id = None, page_number=1):
-    products = Product.objects.filter(category_id=category_id) if category_id else Product.objects.all()
+class ProductsListView(ListView):
+    model = Product
+    template_name = 'products/products.html'
+    paginate_by = 3
 
-    per_page = 3
-    paginator = Paginator(products, per_page)
-    products_paginator = paginator.page(page_number)
+    def get_queryset(self):
+        queryset = super(ProductsListView, self).get_queryset()  # Product.objects.all()
+        category_id = self.kwargs.get('category_id')  # kwargs - словарик переданных данных; ключ должен совпадать с динамической переменной в URLS.py
+                                                      # когда вызывается get для словарика, а такого ключа нет - то возвращается None
+        return queryset.filter(category_id=category_id) if category_id else queryset
 
-    context = {
-        'title': 'Store - Каталог',
-        'products': products_paginator,
-        'categories': ProductCategory.objects.all(),  # categories = [<QuerySet ['Одежда']>, <QuerySet ['Обувь']>]
-    }
-    return render(request, 'products/products.html', context=context)
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(ProductsListView, self).get_context_data()  # вызов родительского класса перед добавлением своих параметров
+        context['title'] = 'Store - Каталог'
+        context['categories'] = ProductCategory.objects.all()
+        return context
 
 
 @login_required
