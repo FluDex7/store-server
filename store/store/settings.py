@@ -29,6 +29,8 @@ DEBUG = True
 # Разрешенные домены, например: 'mysite.com' или '*' для всех доменов
 ALLOWED_HOSTS = ['*']
 
+DOMAIN_NAME = 'http://localhost:8000'
+
 # Application definition
 # Установленные приложения [users app & products app]
 INSTALLED_APPS = [
