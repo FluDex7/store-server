@@ -1,7 +1,9 @@
 from django.shortcuts import HttpResponseRedirect
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
+from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
+
 from products.models import ProductCategory, Product, Basket  # Подключение таблиц(моделей) и последующая передача..
                                                       # ..в качестве аргумента
 # Create your views here.
