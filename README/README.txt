@@ -89,3 +89,5 @@ b) импортировать: from store import wsgi, где store - катал
 
 9. Пагинация: https://docs.djangoproject.com/en/4.2/topics/pagination/#top
 
+10. Сравнение FBV(Function-based views) и CBV(Class-based views), картинка в файле FBV_CBV.png
+https://docs.djangoproject.com/en/4.2/ref/class-based-views/
