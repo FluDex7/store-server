@@ -117,4 +117,9 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 14. Email
-EMAIL_BACKEND = 'django.core.mail.backend.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backend.console.EmailBackend' # удалить
+EMAIL_HOST = 'smtp.yandex.com'  # smtp.google.com
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'tes7server@yandex.ru'  - почта, созданная для сервера
+EMAIL_HOST_PASSWORD = 'bgrjyankxfpwvcei'  - пароль приложения(не от самого аккаунта) - https://id.yandex.ru/security/app-passwords
+EMAIL_USE_SSL = True  - (не работает)
