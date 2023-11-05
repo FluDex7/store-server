@@ -2,11 +2,12 @@ from django.contrib import admin
 from users.models import User, EmailVerification
 from products.admin import BasketAdmin
 
+
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('username','email', 'is_active', 'is_verified_email')
+    list_display = ('username', 'email', 'is_active', 'is_verified_email')
     search_fields = ('username',)
-    list_filter = ('is_active','is_staff')
+    list_filter = ('is_active', 'is_staff')
     inlines = (BasketAdmin,)
 
 

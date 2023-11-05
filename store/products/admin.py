@@ -6,6 +6,7 @@ from products.models import ProductCategory, Product, Basket
 
 admin.site.register(ProductCategory)
 
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'price', 'quantity', 'category')  # Отображение объектов
@@ -13,6 +14,7 @@ class ProductAdmin(admin.ModelAdmin):
     # readonly_fields = ('description',)
     search_fields = ('name',)  # Поиск по имени
     ordering = ('name',)  # Сортировка по алфавитному порядку -name для обратному отображению
+
 
 class BasketAdmin(admin.TabularInline):  # Для Foreign связи
     model = Basket

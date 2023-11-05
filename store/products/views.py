@@ -1,18 +1,10 @@
 from django.shortcuts import HttpResponseRedirect
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
-from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
 
 from common.views import TitleMixin
-from products.models import ProductCategory, Product, Basket  # Подключение таблиц(моделей) и последующая передача..
-                                                      # ..в качестве аргумента
-# Create your views here.
-# здесь создаются функции(могут и классы) для отображения шаблонов приложения
-# сленг: функции = контроллеры = вьюхи
-# request - экземляр класса HttpRequest; в файле urls.py каждый контроллер передаётся ссылкой,
-#           и в методе path вызывается контроллер с параметром request (запрос).
-
+from products.models import ProductCategory, Product, Basket
 
 
 class IndexView(TitleMixin, TemplateView):
@@ -28,12 +20,14 @@ class ProductsListView(TitleMixin, ListView):
 
     def get_queryset(self):
         queryset = super(ProductsListView, self).get_queryset()  # Product.objects.all()
-        category_id = self.kwargs.get('category_id')  # kwargs - словарик переданных данных; ключ должен совпадать с динамической переменной в URLS.py
-                                                      # когда вызывается get для словарика, а такого ключа нет - то возвращается None
+        category_id = self.kwargs.get('category_id')
+        # kwargs - словарик переданных данных; ключ должен совпадать с динамической переменной в URLS.py
+        # когда вызывается get для словарика, а такого ключа нет - то возвращается None
         return queryset.filter(category_id=category_id) if category_id else queryset
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(ProductsListView, self).get_context_data()  # вызов родительского класса перед добавлением своих параметров
+        context = super(ProductsListView, self).get_context_data()
+        # вызов родительского класса перед добавлением своих параметров
         context['categories'] = ProductCategory.objects.all()
         return context
 
