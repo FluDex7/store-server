@@ -166,7 +166,7 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-SITE_ID = 2  # Нет в документации, 2 - потому что под первым айди был example.com, вторым я создал ГитХаб
+SITE_ID = 3  # Нет в документации, 2 - потому что под первым айди был example.com, вторым я создал ГитХаб
 
 SOCIALACCOUNT_PROVIDERS = {
     'github': {
