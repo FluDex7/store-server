@@ -3,11 +3,11 @@
     "model": "products.product",
     "pk": 1,
     "fields": {
-      "name": "╒єфш ўхЁэюую ЎтхЄр ё ьюэюуЁрььрьш adidas Originals",
-      "description": "╠ уър  Єърэ№ фы  ётшЄ°юЄют. ╤Єшы№ ш ъюьЇюЁЄ Ц ¤Єю юсЁрч цшчэш.",
+      "name": "Худи черного цвета с монограммами adidas Originals",
+      "description": "Мягкая ткань для свитшотов. Стиль и комфорт – это образ жизни.",
       "price": "6090.00",
       "quantity": 0,
-      "image": "products_images/Adidas-hoodie_wpZu39m_zc6VCus_iDik3ah.png",
+      "image": "products_images/Adidas-hoodie_wpZu39m_zc6VCus_iDik3ah_GnbmNAJ.png",
       "category": 1
     }
   },
@@ -15,11 +15,11 @@
     "model": "products.product",
     "pk": 2,
     "fields": {
-      "name": "╤шэ   ъєЁЄър The North Face",
-      "description": "├ырфър  Єърэ№. ┬юфюэхяЁюэшЎрхьюх яюъЁ√Єшх. ╦хуъшщ ш Єхяы√щ яєїют√щ эряюыэшЄхы№.",
+      "name": "Синяя куртка The North Face",
+      "description": "Гладкая ткань. Водонепроницаемое покрытие. Легкий и теплый пуховый наполнитель.",
       "price": "23725.00",
       "quantity": 0,
-      "image": "products_images/Blue-jacket-The-North-Face_hz38PyO_r8MZE79_gPSVqQC.png",
+      "image": "products_images/Blue-jacket-The-North-Face_hz38PyO_r8MZE79_gPSVqQC_TceVHqs.png",
       "category": 2
     }
   },
@@ -27,11 +27,11 @@
     "model": "products.product",
     "pk": 3,
     "fields": {
-      "name": "╩юЁшўэхт√щ ёяюЁЄштэ√щ oversized-Єюя ASOS DESIGN",
-      "description": "╠рЄхЁшры ё яы■°хтющ ЄхъёЄєЁющ. ╙фюсэ√щ ш ь уъшщ.",
+      "name": "Коричневый спортивный oversized-топ ASOS DESIGN",
+      "description": "Материал с плюшевой текстурой. Удобный и мягкий.",
       "price": "3390.00",
       "quantity": 0,
-      "image": "products_images/Brown-sports-oversized-top-ASOS-DESIGN_XAYxrHy_todAa5P_iubiLx1.png",
+      "image": "products_images/Brown-sports-oversized-top-ASOS-DESIGN_XAYxrHy_todAa5P_iubiLx1_Ezo7Qh8.png",
       "category": 5
     }
   },
@@ -39,11 +39,11 @@
     "model": "products.product",
     "pk": 4,
     "fields": {
-      "name": "╫хЁэ√щ Ё■ъчръ Nike Heritage",
-      "description": "╧ыюЄэр  Єърэ№. ╦хуъшщ ьрЄхЁшры.",
+      "name": "Черный рюкзак Nike Heritage",
+      "description": "Плотная ткань. Легкий материал.",
       "price": "2340.00",
       "quantity": 0,
-      "image": "products_images/Black-Nike-Heritage-backpack_h81ElMr_rGWExYY_U323qUj.png",
+      "image": "products_images/Black-Nike-Heritage-backpack_h81ElMr_rGWExYY_U323qUj_O0SMFDO.png",
       "category": 4
     }
   },
@@ -51,11 +51,11 @@
     "model": "products.product",
     "pk": 5,
     "fields": {
-      "name": "╫хЁэ√х ЄєЇыш эр яырЄЇюЁьх ё 3 ярЁрьш ы■тхЁёют Dr Martens 1461 Bex",
-      "description": "├ырфъшщ ъюцрэ√щ тхЁї. ═рЄєЁры№э√щ ьрЄхЁшры.",
+      "name": "Черные туфли на платформе с 3 парами люверсов Dr Martens 1461 Bex",
+      "description": "Гладкий кожаный верх. Натуральный материал.",
       "price": "13590.00",
       "quantity": 0,
-      "image": "products_images/Black-Dr-Martens-shoes_QWGHfRI_wtdVHde_NKopuCb.png",
+      "image": "products_images/Black-Dr-Martens-shoes_QWGHfRI_wtdVHde_NKopuCb_5ab1NcL.png",
       "category": 3
     }
   },
@@ -63,11 +63,11 @@
     "model": "products.product",
     "pk": 6,
     "fields": {
-      "name": "╥хьэю-ёшэшх °шЁюъшх ёЄЁюушх сЁ■ъш ASOS DESIGN",
-      "description": "╦хуър  ¤ырёЄшўэр  Єърэ№ ёшЁёръхЁ ╘ръЄєЁэр  Єърэ№.",
+      "name": "Темно-синие широкие строгие брюки ASOS DESIGN",
+      "description": "Легкая эластичная ткань сирсакер Фактурная ткань.",
       "price": "2890.00",
       "quantity": 0,
-      "image": "products_images/Dark-blue-wide-leg-ASOs-DESIGN-trousers_OXwfdrP_hz5IqVg_BycGVS8.png",
+      "image": "products_images/Dark-blue-wide-leg-ASOs-DESIGN-trousers_OXwfdrP_hz5IqVg_BycGVS8_xWCj3XX.png",
       "category": 2
     }
   }
