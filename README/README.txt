@@ -95,3 +95,26 @@ https://docs.djangoproject.com/en/4.2/ref/class-based-views/
 11. Миксины - дополнительный функционал для классов. Вставляются перед основным наследуемым классом
     Например: class SomeView(SomeMixin, SomeParentView)
     Используется для объединения общего кода в класс и последующего вызова в отдельных классах
+
+12. Media:
+in template: +<form enctype="multipart/form-data"> + <img scr="{%if..., {{ user.image.url }} ..else..default..endif%}">
+
+in main urls:
++from django.conf import settings
++from django.conf.urls.static import static
++urlpatterns = [...] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+in settings: +MEDIA_URL = '/media/' +MEDIA_ROOT = BASE_DIR / 'media'
+
+12.2 clean nolinked media-files
++pip install django-cleanup
++INSTALLED_APPS = ( ..., 'django_cleanup.apps.CleanupConfig',)
+
+13. Users settings
+AUTH_USER_MODEL = 'users.User'
+LOGIN_URL = '/users/login/ '
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+14. Email
+EMAIL_BACKEND = 'django.core.mail.backend.console.EmailBackend'
