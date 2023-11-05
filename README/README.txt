@@ -123,3 +123,5 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = 'tes7server@yandex.ru'  - почта, созданная для сервера
 EMAIL_HOST_PASSWORD = 'bgrjyankxfpwvcei'  - пароль приложения(не от самого аккаунта) - https://id.yandex.ru/security/app-passwords
 EMAIL_USE_SSL = True  - (не работает)
+
+15. Контекстные процессоры - глобальные переменные, которые можно использовать в Templates не передавая их
