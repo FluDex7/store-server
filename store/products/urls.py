@@ -1,6 +1,7 @@
 from django.urls import path
 
 from products.views import ProductsListView, basket_add, basket_remove
+
 # Подключение контроллеров файла views.py приложения products
 
 app_name = 'products'

@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 # Регистрация, созданной в данном приложении, таблицы=модели для отображения её в Админ-панели
-from products.models import ProductCategory, Product, Basket
+from products.models import Basket, Product, ProductCategory
 
 admin.site.register(ProductCategory)
 
