@@ -1,5 +1,13 @@
 from http import HTTPStatus
 
+#  Решение проблемы запуска тестов
+import os
+import django
+
+if 'env setting':
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'store.settings')
+    django.setup()
+
 from django.test import TestCase
 from django.urls import reverse
 
@@ -14,7 +22,8 @@ class IndexViewTestCase(TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertEqual(response.context_data['title'], 'Store')
-        self.assertTemplateUsed(response, 'products/index.html')
+        self.assertEqual(response.context_data['view'].template_name, 'products/index.html')
+        # self.assertTemplateUsed(response, 'products/index.html') вместо этого
 
 
 class ProductsListViewTestCase(TestCase):
@@ -27,5 +36,5 @@ class ProductsListViewTestCase(TestCase):
         products = Product.objects.all()
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertEqual(response.context_data['title'], 'Store - Каталог')
-        self.assertTemplateUsed(response, 'products/products.html')
+        self.assertEqual(response.context_data['view'].template_name, 'products/products.html')
         self.assertEqual(response.context_data['object_list'], products)

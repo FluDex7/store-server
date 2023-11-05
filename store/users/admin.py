@@ -6,8 +6,8 @@ from users.models import EmailVerification, User
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('username', 'email', 'is_active', 'is_verified_email')
-    search_fields = ('username',)
+    list_display = ('id', 'username', 'email', 'is_active', 'is_verified_email')
+    search_fields = ('username', 'id', 'email')
     list_filter = ('is_active', 'is_staff')
     inlines = (BasketAdmin,)
 
