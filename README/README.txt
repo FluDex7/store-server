@@ -132,3 +132,7 @@ EMAIL_USE_SSL = True  - (не работает)
 Линтеры - просматривает стандарт кода, чтобы он подходил под единый стандарт написания кода (PEP8), например: flake8, pylint
 Commands:
 +flake8 .
+
+17. OAuth FAQ installing - https://docs.allauth.org/en/latest/installation/quickstart.html
+connect GitHub provider - https://docs.allauth.org/en/latest/socialaccount/providers/github.html
+template links - https://docs.allauth.org/en/latest/socialaccount/templates.html

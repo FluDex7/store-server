@@ -40,6 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',  # Нет в документации
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
 
     'products',  # добавление приложения
     'users',
@@ -53,6 +59,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    "allauth.account.middleware.AccountMiddleware",
 ]
 # Расположение url-адресов
 ROOT_URLCONF = 'store.urls'
@@ -145,8 +153,25 @@ LOGIN_REDIRECT_URL = '/'  # Переадресация после входа в 
 LOGOUT_REDIRECT_URL = '/'  # Переадресация после выхода с аккаунта
 
 # sending emails
-EMAIL_HOST = 'smtp.yandex.com'
-EMAIL_PORT = 465
-EMAIL_HOST_USER = 'tes7server@yandex.ru'
-EMAIL_HOST_PASSWORD = 'JRuY3Y-Pof'
-EMAIL_USE_SSL = True
+# EMAIL_HOST = 'smtp.yandex.com'
+# EMAIL_PORT = 465
+# EMAIL_HOST_USER = 'tes7server@yandex.ru'
+# EMAIL_HOST_PASSWORD = 'JRuY3Y-Pof'
+# EMAIL_USE_SSL = True
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# OAuth
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SITE_ID = 2  # Нет в документации, 2 - потому что под первым айди был example.com, вторым я создал ГитХаб
+
+SOCIALACCOUNT_PROVIDERS = {
+    'github': {
+        'SCOPE': [
+            'user',
+        ],
+    }
+}

@@ -27,7 +27,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name='index'),  # передача контроллера осущесвтляется по ссылке(без скобок)
     path('products/', include('products.urls', namespace='products')),
-    path('users/', include('users.urls', namespace='users'))
+    path('users/', include('users.urls', namespace='users')),
+    path('accounts/', include('allauth.urls')),
 ]
 
 # На локальном уровне
