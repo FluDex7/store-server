@@ -106,51 +106,235 @@ in main urls:
 
 in settings: +MEDIA_URL = '/media/' +MEDIA_ROOT = BASE_DIR / 'media'
 
-12.2 clean nolinked media-files
-+pip install django-cleanup
-+INSTALLED_APPS = ( ..., 'django_cleanup.apps.CleanupConfig',)
-
 13. Users settings
 AUTH_USER_MODEL = 'users.User'
 LOGIN_URL = '/users/login/ '
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-14. Email
+14. Контекстные процессоры - глобальные переменные, которые можно использовать в Templates не передавая их
+
+15. Start server:
+    +redis-cli
+    +sudo su postgres
+    +psql
+    +celery -A store worker -l INFO
+    and django-server
+
+
+------------------------------------------------------APPS|MODULES------------------------------------------------------
+---------------------------------------EMAIL:
+----in settings.py------------------------------------------------------------------------------------------------------
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = '9e7erteagle@gmail.com' - почта, с двухэтапной авторизацией!!!
 EMAIL_HOST_PASSWORD = 'kejg krdk rnpo vqcl' - пароль, созданный для приложения
 EMAIL_USE_SSL = True
+----in models.py--------------------------------------------------------------------------------------------------------
+from django.core.mail import send_mail
+send_mail(
+            subject=subject,
+            message=message,
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[self.user.email],
+            fail_silently=False,
+        )
 
-15. Контекстные процессоры - глобальные переменные, которые можно использовать в Templates не передавая их
+---------------------------------------PostgreSQL:
+1. Download PostgreSQL from official site - https://www.postgresql.org/download/linux/debian/
+----in console----------------------------------------------------------------------------------------------------------
++sudo su postgres
++psql - these commands also needs for launch server(+\c store_db)
 
-16. Есть стандарт написания кода на Python - PEP8 (https://peps.python.org/pep-0008/)
-Утилиты:
-Форматеры - упорядочивают импорты, например: Blacl, Isort
-Линтеры - просматривает стандарт кода, чтобы он подходил под единый стандарт написания кода (PEP8), например: flake8, pylint
-Commands:
++CREATE DATABASE db_name;
++CREATE ROLE name with password "password";
++ALTER ROLE "name" WITH LOGIN;
++GRANT ALL PRIVILEGES ON DATABASE "db_name" TO name;
++ALTER USER name CREATEDB;
+
+----in Terminal---------------------------------------------------------------------------------------------------------
++pip install psycopg2
+
+----in settings.py------------------------------------------------------------------------------------------------------
++DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'store_db',
+        'USER': 'store_username',
+        'PASSWORD': 'store_password',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+
+----in Terminal---------------------------------------------------------------------------------------------------------
++python3 manage.py dumpdata appname.Model > name.json
+(delete sqlite3.db, makemigrations, migrate)
++python3 manage.py loaddata name.json
+
+---------------------------------------Redis:
+1. Download Redis from official site - https://redis.io/docs/install/install-redis/install-redis-on-linux/
+----in console----
++redis-cli
+
+----in Terminal---------------------------------------------------------------------------------------------------------
++pip install django-redis
+
+----in settings.py------------------------------------------------------------------------------------------------------
++CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
+
+---------------------------------------Celery:
+----in Terminal---------------------------------------------------------------------------------------------------------
++pip install "celery[redis]"
+
+----in store/store/celery.py--------------------------------------------------------------------------------------------
+import os
+
+from celery import Celery
+
+# Set the default Django settings module for the 'celery' program.
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'store.settings')
+
+app = Celery('store')
+
+# Using a string here means the worker doesn't have to serialize
+# the configuration object to child processes.
+# - namespace='CELERY' means all celery-related configuration keys
+#   should have a `CELERY_` prefix.
+app.config_from_object('django.conf:settings', namespace='CELERY')
+
+# Load task modules from all registered Django apps.
+app.autodiscover_tasks()
+
+----in store/store/__init__.py------------------------------------------------------------------------------------------
+# This will make sure the app is always imported when
+# Django starts so that shared_task will use this app.
+from .celery import app as celery_app
+
+__all__ = ('celery_app',)
+
+----in settings.py------------------------------------------------------------------------------------------------------
+# Celery
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
+
+----in app/tasks.py-----------------------------------------------------------------------------------------------------
+from celery import shared_task
+...
+@shared_task
+def function(*args): ...
+
+----in file, where this function will be init---------------------------------------------------------------------------
+from app.tasks import function
+...
+function.delay(*args)
+
+----in Console or Terminal----------------------------------------------------------------------------------------------
++celery -A store worker -l INFO
+
+---------------------------------------django-cleanup(cleaning nolink media-files):
+----in Terminal----
++pip install django-cleanup
+
+----in settings.py----
++INSTALLED_APPS = ( ..., 'django_cleanup.apps.CleanupConfig',)
+
+---------------------------------------flake8(checks the code for compliance with PEP8):
+----in Terminal----
++pip install flake8
 +flake8 .
 
-17. OAuth FAQ installing - https://docs.allauth.org/en/latest/installation/quickstart.html
-connect GitHub provider - https://docs.allauth.org/en/latest/socialaccount/providers/github.html
-template links - https://docs.allauth.org/en/latest/socialaccount/templates.html
+---------------------------------------Isort(sorts imports):
+----in Terminal----
++pip install isort
++isort .
 
-18. django-debug-toolbar - https://django-debug-toolbar.readthedocs.io/en/latest/installation.html
-    redis - https://redis.io/docs/install/install-redis/install-redis-on-linux/
-    redis-cli in console
-    pip install django-redis
-    https://docs.djangoproject.com/en/4.2/topics/cache/
+---------------------------------------OAuth(https://django-oauth-toolkit.readthedocs.io/en/latest/install.html):
+----in Terminal---------------------------------------------------------------------------------------------------------
++pip install django-allauth
 
-19. celery install - https://docs.celeryq.dev/en/stable/django/first-steps-with-django.html#using-celery-with-django
-pip install "celery[redis]"
->celery.py >>__init__.py
-celery -A store worker -l INFO
+----in settings.py------------------------------------------------------------------------------------------------------
++MIDDLEWARE = [
+    'allauth.account.middleware.AccountMiddleware',
+]
 
-20. Start server:
-    +redis-cli
-    +sudo su postgres
-    +psql
-    +celery -A store worker -l INFO
-    and django-server
++TEMPLATES = [
+    {
+        'OPTIONS': {
+            'context_processors': [
+                ...
+                'django.template.context_processors.request',
+                ...
+            ],
+        },
+    },
+]
+
+# OAuth
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SITE_ID = 3  # ID добавленного сайта(по порядку, первым был example.com, 2й я проебал, 3 щас)
+
+SOCIALACCOUNT_PROVIDERS = {
+    'github': {
+        'SCOPE': [
+            'user',
+        ],
+    }
+    'someprovider': {}  # https://docs.allauth.org/en/latest/socialaccount/providers/index.html
+}
+
+INSTALLED_APPS = [
+    ...
+    'django.contrib.auth',
+    'django.contrib.messages',
+    'django.contrib.sites',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',  # some provider app
+]
+
+----store/usrl.py-------------------------------------------------------------------------------------------------------
+urlpatterns = [
+    ...
+    path('accounts/', include('allauth.urls')),
+]
+
+---------------------------------------django-debug-toolbar:
+----in Terminal---------------------------------------------------------------------------------------------------------
++pip install django-debug-toolbar
+
+----in settings.py------------------------------------------------------------------------------------------------------
+INSTALLED_APPS = [
+    ...,
+    'debug_toolbar',
+    ...
+]
+
+MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+]
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+    'localhost',
+]
+
+----in store/urls.py----------------------------------------------------------------------------------------------------
+if settings.DEBUG:
+    urlpatterns.append(path("__debug__/", include("debug_toolbar.urls")))
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # for media-files, not for toolbar
