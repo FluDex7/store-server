@@ -146,3 +146,11 @@ template links - https://docs.allauth.org/en/latest/socialaccount/templates.html
 19. celery install - https://docs.celeryq.dev/en/stable/django/first-steps-with-django.html#using-celery-with-django
 pip install "celery[redis]"
 >celery.py >>__init__.py
+celery -A store worker -l INFO
+
+20. Start server:
+    +redis-cli
+    +sudo su postgres
+    +psql
+    +celery -A store worker -l INFO
+    and django-server
