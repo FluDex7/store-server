@@ -1,5 +1,5 @@
 {% extends 'products/base.html'%}
-{% load static %}
+{% load static cache %}
 
 {% block css %}
 <link href="{% static 'vendor/css/products.css' %}" rel="stylesheet">
@@ -55,31 +55,32 @@
             </div>
 
             <div class="row">
-
-                {% for product in object_list %} <!--object_list - Product.objects.all()-->
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="#">
-                            <img class="card-img-top"
-                                 alt="{{ product.description }}"
-                                 src="{{ product.image.url }}"> <!-- product.image содержит объект, поэтому ссылку
-                                                                    на него можно получить через метод .url   -->
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <a href="#">{{ product.name }}</a>
-                            </h4>
-                            <h5>{{ product.price }} руб.</h5>
-                            <p class="card-text">{{ product.description }}</p>
-                        </div>
-                        <div class="card-footer text-center">
-                            <a href="{% url 'products:basket_add' product.id %} " class="btn btn-outline-success">
-                                Отправить в корзину
+                {% cache 30 object_list %}
+                    {% for product in object_list %} <!--object_list - Product.objects.all()-->
+                        <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card h-100">
+                            <a href="#">
+                                <img class="card-img-top"
+                                     alt="{{ product.description }}"
+                                     src="{{ product.image.url }}"> <!-- product.image содержит объект, поэтому ссылку
+                                                                        на него можно получить через метод .url   -->
                             </a>
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    <a href="#">{{ product.name }}</a>
+                                </h4>
+                                <h5>{{ product.price }} руб.</h5>
+                                <p class="card-text">{{ product.description }}</p>
+                            </div>
+                            <div class="card-footer text-center">
+                                <a href="{% url 'products:basket_add' product.id %} " class="btn btn-outline-success">
+                                    Отправить в корзину
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                {% endfor %}
+                    {% endfor %}
+                {% endcache %}
 
 
             </div>
