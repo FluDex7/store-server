@@ -138,3 +138,8 @@ connect GitHub provider - https://docs.allauth.org/en/latest/socialaccount/provi
 template links - https://docs.allauth.org/en/latest/socialaccount/templates.html
 
 18. django-debug-toolbar - https://django-debug-toolbar.readthedocs.io/en/latest/installation.html
+    redis - https://redis.io/docs/install/install-redis/install-redis-on-linux/
+    redis-cli in console
+    pip install django-redis
+    https://docs.djangoproject.com/en/4.2/topics/cache/
+
