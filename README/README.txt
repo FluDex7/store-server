@@ -117,12 +117,12 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 14. Email
-EMAIL_BACKEND = 'django.core.mail.backend.console.EmailBackend' # удалить
-EMAIL_HOST = 'smtp.yandex.com'  # smtp.google.com
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = 'tes7server@yandex.ru'  - почта, созданная для сервера
-EMAIL_HOST_PASSWORD = 'bgrjyankxfpwvcei'  - пароль приложения(не от самого аккаунта) - https://id.yandex.ru/security/app-passwords
-EMAIL_USE_SSL = True  - (не работает)
+EMAIL_HOST_USER = '9e7erteagle@gmail.com' - почта, с двухэтапной авторизацией!!!
+EMAIL_HOST_PASSWORD = 'kejg krdk rnpo vqcl' - пароль, созданный для приложения
+EMAIL_USE_SSL = True
 
 15. Контекстные процессоры - глобальные переменные, которые можно использовать в Templates не передавая их
 
@@ -143,3 +143,6 @@ template links - https://docs.allauth.org/en/latest/socialaccount/templates.html
     pip install django-redis
     https://docs.djangoproject.com/en/4.2/topics/cache/
 
+19. celery install - https://docs.celeryq.dev/en/stable/django/first-steps-with-django.html#using-celery-with-django
+pip install "celery[redis]"
+>celery.py >>__init__.py
