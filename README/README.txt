@@ -136,3 +136,5 @@ Commands:
 17. OAuth FAQ installing - https://docs.allauth.org/en/latest/installation/quickstart.html
 connect GitHub provider - https://docs.allauth.org/en/latest/socialaccount/providers/github.html
 template links - https://docs.allauth.org/en/latest/socialaccount/templates.html
+
+18. django-debug-toolbar - https://django-debug-toolbar.readthedocs.io/en/latest/installation.html
