@@ -170,12 +170,13 @@ LOGIN_REDIRECT_URL = '/'  # Переадресация после входа в 
 LOGOUT_REDIRECT_URL = '/'  # Переадресация после выхода с аккаунта
 
 # sending emails
-# EMAIL_HOST = 'smtp.yandex.com'
-# EMAIL_PORT = 465
-# EMAIL_HOST_USER = 'tes7server@yandex.ru'
-# EMAIL_HOST_PASSWORD = 'JRuY3Y-Pof'
-# EMAIL_USE_SSL = True
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = '9e7erteagle@gmail.com'
+EMAIL_HOST_PASSWORD = 'kejg krdk rnpo vqcl'
+EMAIL_USE_SSL = True
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # OAuth
 AUTHENTICATION_BACKENDS = [
