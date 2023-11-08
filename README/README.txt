@@ -340,3 +340,14 @@ INTERNAL_IPS = [
 if settings.DEBUG:
     urlpatterns.append(path("__debug__/", include("debug_toolbar.urls")))
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # for media-files, not for toolbar
+
+---------------------------------------django-humanize(https://docs.djangoproject.com/en/4.2/ref/contrib/humanize/):
+----in settings.py----
+INSTALLED_APPS = [
+    ...,
+    'django.contrib.humanize',
+    ...
+]
+
+----in template----
+{% load humanize %}
