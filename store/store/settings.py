@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
 
     'products',  # добавление приложения
+    'orders',
     'users',
 ]
 # Промежуточные слои
