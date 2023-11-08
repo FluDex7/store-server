@@ -121,8 +121,11 @@ LOGOUT_REDIRECT_URL = '/'
     +celery -A store worker -l INFO
     and django-server
 
+<<<<<<< HEAD
 16. Платёжные системы: Paypal, Stripe, IO
 
+=======
+>>>>>>> 97015732a351dc33f00951ab63fd0becbbafd83d
 
 ------------------------------------------------------APPS|MODULES------------------------------------------------------
 ---------------------------------------EMAIL:
