@@ -29,7 +29,7 @@ DEBUG = True
 # Разрешенные домены, например: 'mysite.com' или '*' для всех доменов
 ALLOWED_HOSTS = ['*']
 
-DOMAIN_NAME = 'http://localhost:8000'
+DOMAIN_NAME = 'http://127.0.0.1:8000'
 
 # Application definition
 # Установленные приложения [users app & products app]
@@ -199,3 +199,9 @@ SOCIALACCOUNT_PROVIDERS = {
 # Celery
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
 CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
+
+# Stripe
+STRIPE_PUBLIC_KEY = \
+    'pk_test_51OAAKICr2nvgUv25zXUKxCbvzqVjRPl00GqewUgWO8qVlG5uHySXgsMM7WaEk0mzPzepH4QLnwrjQV4k1CXukN6u00BQZkcPmn'
+STRIPE_SECRET_KEY = \
+    'sk_test_51OAAKICr2nvgUv2541iCiwDMm71wBRIrnZehZS9EBulkEe3Bnsg9q7XWof0mKaSYyCzB1dBHQiJZoQOpgbV0y9gO00BvnlhYQ3'
