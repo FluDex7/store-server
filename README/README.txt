@@ -393,3 +393,11 @@ def post(self, request, *args, **kwargs):
     )
     return HttpResponseRedirect(checkout_session.url, status=HTTPStatus.SEE_OTHER)
 
+----How get answer from Striple - Webhook-------------------------------------------------------------------------------
+1. Fulfillment an end of page >> make as showed(Download Striple CLI, ...) - \
+                                                                https://stripe.com/docs/payments/checkout/fulfill-orders
+----in settings.py----
+STRIPE_WEBHOOK_SECRET = 'whsec_edcf5cd984acd15023a1c4771331abf828dde08fc95738e0af9a0e5ae7080f3d'
+
+----in Terminal(after all steps)----
+stripe listen --forward-to 127.0.0.1:8000/webhook/stripe/
