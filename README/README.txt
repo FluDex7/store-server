@@ -127,16 +127,25 @@ LOGOUT_REDIRECT_URL = '/'
 =======
 >>>>>>> 97015732a351dc33f00951ab63fd0becbbafd83d
 
-------------------------------------------------------APPS|MODULES------------------------------------------------------
----------------------------------------EMAIL:
-----in settings.py------------------------------------------------------------------------------------------------------
+------------------------------------------------------APPS & MODULES----------------------------------------------------
+########################################################################################################################
+########################################################################################################################
+########################################################################################################################
+##################$ THIS WILL BE PLACED APPS AND MODULES, WHICH I USED WITHIN MY PROGGER LIFE $#########################
+########################################################################################################################
+########################################################################################################################
+########################################################################################################################
+------------------------------------------------------------------------------------------------------------------------
+                                                         EMAIL
+------------------------------------------------------------------------------------------------------------------------
+----in settings.py----------------------------------------------
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = '9e7erteagle@gmail.com' - почта, с двухэтапной авторизацией!!!
 EMAIL_HOST_PASSWORD = 'kejg krdk rnpo vqcl' - пароль, созданный для приложения
 EMAIL_USE_SSL = True
-----in models.py--------------------------------------------------------------------------------------------------------
+----in models.py-----------------------------------
 from django.core.mail import send_mail
 send_mail(
             subject=subject,
@@ -146,9 +155,11 @@ send_mail(
             fail_silently=False,
         )
 
----------------------------------------PostgreSQL:
+------------------------------------------------------------------------------------------------------------------------
+                                                       PostgreSQL
+------------------------------------------------------------------------------------------------------------------------
 1. Download PostgreSQL from official site - https://www.postgresql.org/download/linux/debian/
-----in console----------------------------------------------------------------------------------------------------------
+----in console-------------------------------------------------------
 +sudo su postgres
 +psql - these commands also needs for launch server(+\c store_db)
 
@@ -158,10 +169,10 @@ send_mail(
 +GRANT ALL PRIVILEGES ON DATABASE "db_name" TO name;
 +ALTER USER name CREATEDB;
 
-----in Terminal---------------------------------------------------------------------------------------------------------
+----in Terminal-----------
 +pip install psycopg2
 
-----in settings.py------------------------------------------------------------------------------------------------------
+----in settings.py------------------------------------------------
 +DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -173,20 +184,22 @@ send_mail(
     }
 }
 
-----in Terminal---------------------------------------------------------------------------------------------------------
+----in Terminal-----------------------------------------
 +python3 manage.py dumpdata appname.Model > name.json
 (delete sqlite3.db, makemigrations, migrate)
 +python3 manage.py loaddata name.json
 
----------------------------------------Redis:
+------------------------------------------------------------------------------------------------------------------------
+                                                         REDIS
+------------------------------------------------------------------------------------------------------------------------
 1. Download Redis from official site - https://redis.io/docs/install/install-redis/install-redis-on-linux/
 ----in console----
 +redis-cli
 
-----in Terminal---------------------------------------------------------------------------------------------------------
+----in Terminal--------------
 +pip install django-redis
 
-----in settings.py------------------------------------------------------------------------------------------------------
+----in settings.py------------------------------------------------
 +CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
@@ -197,11 +210,13 @@ send_mail(
     }
 }
 
----------------------------------------Celery:
-----in Terminal---------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+                                                         CELERY
+------------------------------------------------------------------------------------------------------------------------
+----in Terminal----------------
 +pip install "celery[redis]"
 
-----in store/store/celery.py--------------------------------------------------------------------------------------------
+----in store/store/celery.py----------------------------------------
 import os
 
 from celery import Celery
@@ -220,54 +235,62 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 # Load task modules from all registered Django apps.
 app.autodiscover_tasks()
 
-----in store/store/__init__.py------------------------------------------------------------------------------------------
+----in store/store/__init__.py--------------------------------------
 # This will make sure the app is always imported when
 # Django starts so that shared_task will use this app.
 from .celery import app as celery_app
 
 __all__ = ('celery_app',)
 
-----in settings.py------------------------------------------------------------------------------------------------------
+----in settings.py----------------------------------
 # Celery
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
 CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
 
-----in app/tasks.py-----------------------------------------------------------------------------------------------------
+----in app/tasks.py---------------------------------
 from celery import shared_task
 ...
 @shared_task
 def function(*args): ...
 
-----in file, where this function will be init---------------------------------------------------------------------------
+----in file, where this function will be init-------
 from app.tasks import function
 ...
 function.delay(*args)
 
-----in Console or Terminal----------------------------------------------------------------------------------------------
+----in Console or Terminal--------------------------
 +celery -A store worker -l INFO
 
----------------------------------------django-cleanup(cleaning nolink media-files):
-----in Terminal----
+------------------------------------------------------------------------------------------------------------------------
+                                      django-cleanup(cleaning nolink media-files)
+------------------------------------------------------------------------------------------------------------------------
+----in Terminal--------------
 +pip install django-cleanup
 
-----in settings.py----
+----in settings.py----------------------------------------------
 +INSTALLED_APPS = ( ..., 'django_cleanup.apps.CleanupConfig',)
 
----------------------------------------flake8(checks the code for compliance with PEP8):
+------------------------------------------------------------------------------------------------------------------------
+                                     flake8(checks the code for compliance with PEP8)
+------------------------------------------------------------------------------------------------------------------------
 ----in Terminal----
 +pip install flake8
 +flake8 .
 
----------------------------------------Isort(sorts imports):
+------------------------------------------------------------------------------------------------------------------------
+                                                 Isort(sorts imports)
+------------------------------------------------------------------------------------------------------------------------
 ----in Terminal----
 +pip install isort
 +isort .
 
----------------------------------------OAuth(https://django-oauth-toolkit.readthedocs.io/en/latest/install.html):
-----in Terminal---------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+                         OAuth(https://django-oauth-toolkit.readthedocs.io/en/latest/install.html)
+------------------------------------------------------------------------------------------------------------------------
+----in Terminal--------------
 +pip install django-allauth
 
-----in settings.py------------------------------------------------------------------------------------------------------
+----in settings.py-------------------------------------
 +MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
 ]
@@ -313,17 +336,19 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',  # some provider app
 ]
 
-----store/usrl.py-------------------------------------------------------------------------------------------------------
+----store/usrl.py----------------------------------------------------------------------------------
 urlpatterns = [
     ...
     path('accounts/', include('allauth.urls')),
 ]
 
----------------------------------------django-debug-toolbar:
-----in Terminal---------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+                                                 django-debug-toolbar
+------------------------------------------------------------------------------------------------------------------------
+----in Terminal----------------------
 +pip install django-debug-toolbar
 
-----in settings.py------------------------------------------------------------------------------------------------------
+----in settings.py---------------------------------------
 INSTALLED_APPS = [
     ...,
     'debug_toolbar',
@@ -339,36 +364,40 @@ INTERNAL_IPS = [
     'localhost',
 ]
 
-----in store/urls.py----------------------------------------------------------------------------------------------------
+----in store/urls.py--------------------------------------------------------------------------------------------------
 if settings.DEBUG:
     urlpatterns.append(path("__debug__/", include("debug_toolbar.urls")))
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # for media-files, not for toolbar
 
----------------------------------------django-humanize(https://docs.djangoproject.com/en/4.2/ref/contrib/humanize/):
-----in settings.py----
+------------------------------------------------------------------------------------------------------------------------
+                        django-humanize(https://docs.djangoproject.com/en/4.2/ref/contrib/humanize/)
+------------------------------------------------------------------------------------------------------------------------
+----in settings.py--------------
 INSTALLED_APPS = [
     ...,
     'django.contrib.humanize',
     ...
 ]
 
-----in template----
+----in template------
 {% load humanize %}
 
----------------------------------------Stripe:
+------------------------------------------------------------------------------------------------------------------------
+                                                         Stripe
+------------------------------------------------------------------------------------------------------------------------
 1. Register on official site - stripe.com
 2. Dashboard >> Developers >> API keys >> Publishable key, Secret key
 3. Stripe Docs - https://stripe.com/docs >> Get Started >> Online >> Accept online payments
 
-----in settings.py----
+----in settings.py----------------------
 # Stripe
 STRIPE_PUBLIC_KEY = 'publishable_key'
 STRIPE_SECRET_KEY = 'secret_key'
 
-----in Terminal----
+----in Terminal------
 pip3 install stripe
 
-----in orders.views----
+----in orders.views------------------------------
 import stripe
 from http import HTTPStatus
 
@@ -393,11 +422,54 @@ def post(self, request, *args, **kwargs):
     )
     return HttpResponseRedirect(checkout_session.url, status=HTTPStatus.SEE_OTHER)
 
-----How get answer from Striple - Webhook-------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+                                      Webhook - How get answer from Striple
+------------------------------------------------------------------------------------------------------------------------
 1. Fulfillment an end of page >> make as showed(Download Striple CLI, ...) - \
                                                                 https://stripe.com/docs/payments/checkout/fulfill-orders
-----in settings.py----
+----in settings.py--------------------------------------------------------------------------------
 STRIPE_WEBHOOK_SECRET = 'whsec_edcf5cd984acd15023a1c4771331abf828dde08fc95738e0af9a0e5ae7080f3d'
 
-----in Terminal(after all steps)----
+----in Terminal(after all steps)----------------------------
 stripe listen --forward-to 127.0.0.1:8000/webhook/stripe/
+
+----in view---------------------------------------------------------
+@csrf_exempt
+def stripe_webhook_view(request):
+    payload = request.body
+    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    event = None
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, settings.STRIPE_WEBHOOK_SECRET
+        )
+    except ValueError as e:
+        # Invalid payload
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        return HttpResponse(status=400)
+
+    # Handle the checkout.session.completed event
+    if event['type'] == 'checkout.session.completed':
+        # Retrieve the session. If you require line items in the response, you may include them by expanding line_items.
+        session = stripe.checkout.Session.retrieve(
+            event['data']['object']['id'],
+            expand=['line_items'],
+        )
+
+        line_items = session.line_items
+        # Fulfill the purchase...
+        fulfill_order(line_items)
+
+    # Passed signature verification
+    return HttpResponse(status=200)
+
+def fulfill_order(session):
+  # TODO: fill me in
+  print("Fulfilling order")
+
+------------------------------------------------------------------------------------------------------------------------
+                        THIS DOCUMENTATION MAY BE OLD, NEW INSTRUCTIONS ALWAYS HAVE ON SITE
+------------------------------------------------------------------------------------------------------------------------
