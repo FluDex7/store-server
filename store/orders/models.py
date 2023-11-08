@@ -8,7 +8,7 @@ class Order(models.Model):
     PAID = 1
     ON_WAY = 2
     DELIVERED = 3
-    STATUSES = (
+    STATUSES_CHOICES = (
         (CREATED, 'Создан'),
         (PAID, 'Оплачен'),
         (ON_WAY, 'В пути'),
@@ -19,9 +19,9 @@ class Order(models.Model):
     last_name = models.CharField(max_length=64)
     email = models.EmailField(max_length=256)
     address = models.CharField(max_length=256)
-    backet_history = models.JSONField(default=dict)
+    basket_history = models.JSONField(default=dict)
     created = models.DateTimeField(auto_now_add=True)
-    status = models.SmallIntegerField(default=CREATED, choices=STATUSES)
+    status = models.SmallIntegerField(default=CREATED, choices=STATUSES_CHOICES)
     initiator = models.ForeignKey(to=User, on_delete=models.CASCADE)
 
     def __str__(self):

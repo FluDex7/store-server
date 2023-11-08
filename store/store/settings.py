@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',  # Нет в документации
+    'django.contrib.humanize',
 
     'allauth',
     'allauth.account',
