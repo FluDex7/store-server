@@ -354,3 +354,42 @@ INSTALLED_APPS = [
 
 ----in template----
 {% load humanize %}
+
+---------------------------------------Stripe:
+1. Register on official site - stripe.com
+2. Dashboard >> Developers >> API keys >> Publishable key, Secret key
+3. Stripe Docs - https://stripe.com/docs >> Get Started >> Online >> Accept online payments
+
+----in settings.py----
+# Stripe
+STRIPE_PUBLIC_KEY = 'publishable_key'
+STRIPE_SECRET_KEY = 'secret_key'
+
+----in Terminal----
+pip3 install stripe
+
+----in orders.views----
+import stripe
+from http import HTTPStatus
+
+from django.conf import settings
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+...
+def post(self, request, *args, **kwargs):
+    super(OrderCreateView, self).post(request, *args, **kwargs)
+    checkout_session = stripe.checkout.Session.create(
+        line_items=[
+            {
+                'price': 'price_1OAAiqCr2nvgUv25VD2k9dQm',  # from Stripe docs
+                'quantity': 1,
+            },
+        ],
+        mode='payment',
+        success_url='{}{}'.format(settings.DOMAIN_NAME, reverse('orders:order_success')),
+        cancel_url='{}{}'.format(settings.DOMAIN_NAME, reverse('orders:order_cancelled')),
+    )
+    return HttpResponseRedirect(checkout_session.url, status=HTTPStatus.SEE_OTHER)
+
