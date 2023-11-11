@@ -1,3 +1,23 @@
+TODO:-----------------------------------------------------FAQ-----------------------------------------------------------
+########################################################################################################################
+########################################################################################################################
+###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$##########################
+##################$ THIS WILL BE PLACED USEFUL LINKS TO DOCUMENTATION OF SOME MODULE OR APP $###########################
+###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$##########################
+########################################################################################################################
+########################################################################################################################
+------------------------------------------------------------------------------------------------------------------------
+
+QuerySet - https://docs.djangoproject.com/en/4.2/ref/models/querysets/
+
+Pagination - https://docs.djangoproject.com/en/4.2/topics/pagination/
+
+Class-based views - https://docs.djangoproject.com/en/4.2/ref/class-based-views/
+
+Model fields - https://docs.djangoproject.com/en/4.2/ref/models/fields/
+
+------------------------------------------------------------------------------------------------------------------------
+
 1. Сравнение локальной разработкой и разработкой, которая идёт на production:
 local:
 -исключительно на локальном компьютере или совместном проекте
@@ -82,61 +102,56 @@ QuerrySet - набор запросов, который представляет
 Выход пользователя осуществляется при помощи auth.logout(request) и последующем перенаправлением на главную страницу
 Сообщения можно выводить через form.non_field_errors и также через contrib:messages.success('message')
 
-8. Как пофиксить Python Console:
-a) Пометить проект, который был создан командой django-admin startproject *название проекта*, как sourse root
-b) импортировать: from store import wsgi, где store - каталог(приложение), созданный автоматически, с таким же названием..
-   ..как и проект
-
-9. Пагинация: https://docs.djangoproject.com/en/4.2/topics/pagination/#top
-
-10. Сравнение FBV(Function-based views) и CBV(Class-based views), картинка в файле FBV_CBV.png
-https://docs.djangoproject.com/en/4.2/ref/class-based-views/
-
-11. Миксины - дополнительный функционал для классов. Вставляются перед основным наследуемым классом
+8. Миксины - дополнительный функционал для классов. Вставляются перед основным наследуемым классом
     Например: class SomeView(SomeMixin, SomeParentView)
     Используется для объединения общего кода в класс и последующего вызова в отдельных классах
 
-12. Media:
-in template: +<form enctype="multipart/form-data"> + <img scr="{%if..., {{ user.image.url }} ..else..default..endif%}">
+9. Контекстные процессоры - глобальные переменные, которые можно использовать в Templates не передавая их
 
-in main urls:
-+from django.conf import settings
-+from django.conf.urls.static import static
-+urlpatterns = [...] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-in settings: +MEDIA_URL = '/media/' +MEDIA_ROOT = BASE_DIR / 'media'
-
-13. Users settings
-AUTH_USER_MODEL = 'users.User'
-LOGIN_URL = '/users/login/ '
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
-
-14. Контекстные процессоры - глобальные переменные, которые можно использовать в Templates не передавая их
-
-15. Start server:
+10. Start server:
     +redis-cli
     +sudo su postgres
     +psql
     +celery -A store worker -l INFO
     and django-server
 
-<<<<<<< HEAD
-16. Платёжные системы: Paypal, Stripe, IO
+11. Платёжные системы: Paypal, Stripe, IO
 
+<<<<<<< HEAD
+TODO:------------------------------------------------APPS & MODULES-----------------------------------------------------
+########################################################################################################################
+########################################################################################################################
+###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$##########################
+##################$ THIS WILL BE PLACED APPS AND MODULES, WHICH I USED WITHIN MY PROGGER LIFE $#########################
+###################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$##########################
+########################################################################################################################
+########################################################################################################################
+------------------------------------------------------------------------------------------------------------------------
+TODO:                                                    Email
+=======
 =======
 >>>>>>> 97015732a351dc33f00951ab63fd0becbbafd83d
 
-------------------------------------------------------APPS|MODULES------------------------------------------------------
----------------------------------------EMAIL:
-----in settings.py------------------------------------------------------------------------------------------------------
+------------------------------------------------------APPS & MODULES----------------------------------------------------
+########################################################################################################################
+########################################################################################################################
+########################################################################################################################
+##################$ THIS WILL BE PLACED APPS AND MODULES, WHICH I USED WITHIN MY PROGGER LIFE $#########################
+########################################################################################################################
+########################################################################################################################
+########################################################################################################################
+------------------------------------------------------------------------------------------------------------------------
+                                                         EMAIL
+>>>>>>> 729990b4e2468063d9e4ca534639666403282fac
+------------------------------------------------------------------------------------------------------------------------
+----in settings.py----------------------------------------------
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = '9e7erteagle@gmail.com' - почта, с двухэтапной авторизацией!!!
 EMAIL_HOST_PASSWORD = 'kejg krdk rnpo vqcl' - пароль, созданный для приложения
 EMAIL_USE_SSL = True
-----in models.py--------------------------------------------------------------------------------------------------------
+----in models.py-----------------------------------
 from django.core.mail import send_mail
 send_mail(
             subject=subject,
@@ -146,9 +161,15 @@ send_mail(
             fail_silently=False,
         )
 
----------------------------------------PostgreSQL:
+------------------------------------------------------------------------------------------------------------------------
+<<<<<<< HEAD
+TODO:                                                  PostgreSQL
+=======
+                                                       PostgreSQL
+>>>>>>> 729990b4e2468063d9e4ca534639666403282fac
+------------------------------------------------------------------------------------------------------------------------
 1. Download PostgreSQL from official site - https://www.postgresql.org/download/linux/debian/
-----in console----------------------------------------------------------------------------------------------------------
+----in console-------------------------------------------------------
 +sudo su postgres
 +psql - these commands also needs for launch server(+\c store_db)
 
@@ -158,10 +179,10 @@ send_mail(
 +GRANT ALL PRIVILEGES ON DATABASE "db_name" TO name;
 +ALTER USER name CREATEDB;
 
-----in Terminal---------------------------------------------------------------------------------------------------------
+----in Terminal-----------
 +pip install psycopg2
 
-----in settings.py------------------------------------------------------------------------------------------------------
+----in settings.py------------------------------------------------
 +DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -173,20 +194,26 @@ send_mail(
     }
 }
 
-----in Terminal---------------------------------------------------------------------------------------------------------
+----in Terminal-----------------------------------------
 +python3 manage.py dumpdata appname.Model > name.json
 (delete sqlite3.db, makemigrations, migrate)
 +python3 manage.py loaddata name.json
 
----------------------------------------Redis:
+------------------------------------------------------------------------------------------------------------------------
+<<<<<<< HEAD
+TODO:                                                    Redis
+=======
+                                                         REDIS
+>>>>>>> 729990b4e2468063d9e4ca534639666403282fac
+------------------------------------------------------------------------------------------------------------------------
 1. Download Redis from official site - https://redis.io/docs/install/install-redis/install-redis-on-linux/
 ----in console----
 +redis-cli
 
-----in Terminal---------------------------------------------------------------------------------------------------------
+----in Terminal--------------
 +pip install django-redis
 
-----in settings.py------------------------------------------------------------------------------------------------------
+----in settings.py------------------------------------------------
 +CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
@@ -197,11 +224,17 @@ send_mail(
     }
 }
 
----------------------------------------Celery:
-----in Terminal---------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+<<<<<<< HEAD
+TODO:                                                    Celery
+=======
+                                                         CELERY
+>>>>>>> 729990b4e2468063d9e4ca534639666403282fac
+------------------------------------------------------------------------------------------------------------------------
+----in Terminal----------------
 +pip install "celery[redis]"
 
-----in store/store/celery.py--------------------------------------------------------------------------------------------
+----in store/store/celery.py----------------------------------------
 import os
 
 from celery import Celery
@@ -220,54 +253,95 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 # Load task modules from all registered Django apps.
 app.autodiscover_tasks()
 
-----in store/store/__init__.py------------------------------------------------------------------------------------------
+----in store/store/__init__.py--------------------------------------
 # This will make sure the app is always imported when
 # Django starts so that shared_task will use this app.
 from .celery import app as celery_app
 
 __all__ = ('celery_app',)
 
-----in settings.py------------------------------------------------------------------------------------------------------
+----in settings.py----------------------------------
 # Celery
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
 CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
 
-----in app/tasks.py-----------------------------------------------------------------------------------------------------
+----in app/tasks.py---------------------------------
 from celery import shared_task
 ...
 @shared_task
 def function(*args): ...
 
-----in file, where this function will be init---------------------------------------------------------------------------
+----in file, where this function will be init-------
 from app.tasks import function
 ...
 function.delay(*args)
 
-----in Console or Terminal----------------------------------------------------------------------------------------------
+----in Console or Terminal--------------------------
 +celery -A store worker -l INFO
 
----------------------------------------django-cleanup(cleaning nolink media-files):
-----in Terminal----
+------------------------------------------------------------------------------------------------------------------------
+<<<<<<< HEAD
+TODO:                                 django-cleanup(cleaning nolink media-files)
+=======
+                                      django-cleanup(cleaning nolink media-files)
+>>>>>>> 729990b4e2468063d9e4ca534639666403282fac
+------------------------------------------------------------------------------------------------------------------------
+----in Terminal--------------
 +pip install django-cleanup
 
-----in settings.py----
+<<<<<<< HEAD
+----in settings.py------------------------------------------
++INSTALLED_APPS = [
+    'django_cleanup.apps.CleanupConfig',
+]
+
+------------------------------------------------------------------------------------------------------------------------
+TODO:                                flake8(checks the code for compliance with PEP8)
+=======
+----in settings.py----------------------------------------------
 +INSTALLED_APPS = ( ..., 'django_cleanup.apps.CleanupConfig',)
 
----------------------------------------flake8(checks the code for compliance with PEP8):
+------------------------------------------------------------------------------------------------------------------------
+                                     flake8(checks the code for compliance with PEP8)
+>>>>>>> 729990b4e2468063d9e4ca534639666403282fac
+------------------------------------------------------------------------------------------------------------------------
 ----in Terminal----
 +pip install flake8
 +flake8 .
 
----------------------------------------Isort(sorts imports):
+<<<<<<< HEAD
+----in .flake8----
+[flake8]
+exclude =
+    migrations
+
+ignore =
+    F401
+
+max-line-length = 120
+
+------------------------------------------------------------------------------------------------------------------------
+TODO:                                            Isort(sorts imports)
+=======
+------------------------------------------------------------------------------------------------------------------------
+                                                 Isort(sorts imports)
+>>>>>>> 729990b4e2468063d9e4ca534639666403282fac
+------------------------------------------------------------------------------------------------------------------------
 ----in Terminal----
 +pip install isort
 +isort .
 
----------------------------------------OAuth(https://django-oauth-toolkit.readthedocs.io/en/latest/install.html):
-----in Terminal---------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+<<<<<<< HEAD
+TODO:                    OAuth(https://django-oauth-toolkit.readthedocs.io/en/latest/install.html)
+=======
+                         OAuth(https://django-oauth-toolkit.readthedocs.io/en/latest/install.html)
+>>>>>>> 729990b4e2468063d9e4ca534639666403282fac
+------------------------------------------------------------------------------------------------------------------------
+----in Terminal--------------
 +pip install django-allauth
 
-----in settings.py------------------------------------------------------------------------------------------------------
+----in settings.py-------------------------------------
 +MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
 ]
@@ -313,21 +387,33 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',  # some provider app
 ]
 
-----store/usrl.py-------------------------------------------------------------------------------------------------------
+<<<<<<< HEAD
+----store/usrl.py--------------------------------
+=======
+----store/usrl.py----------------------------------------------------------------------------------
+>>>>>>> 729990b4e2468063d9e4ca534639666403282fac
 urlpatterns = [
     ...
     path('accounts/', include('allauth.urls')),
 ]
 
----------------------------------------django-debug-toolbar:
-----in Terminal---------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+<<<<<<< HEAD
+TODO:                                            django-debug-toolbar
+=======
+                                                 django-debug-toolbar
+>>>>>>> 729990b4e2468063d9e4ca534639666403282fac
+------------------------------------------------------------------------------------------------------------------------
+----in Terminal----------------------
 +pip install django-debug-toolbar
 
-----in settings.py------------------------------------------------------------------------------------------------------
+<<<<<<< HEAD
+----in settings.py----
+=======
+----in settings.py---------------------------------------
+>>>>>>> 729990b4e2468063d9e4ca534639666403282fac
 INSTALLED_APPS = [
-    ...,
     'debug_toolbar',
-    ...
 ]
 
 MIDDLEWARE = [
@@ -339,36 +425,51 @@ INTERNAL_IPS = [
     'localhost',
 ]
 
-----in store/urls.py----------------------------------------------------------------------------------------------------
+<<<<<<< HEAD
+----in store/urls.py--------------------------------------------------------------
+=======
+----in store/urls.py--------------------------------------------------------------------------------------------------
+>>>>>>> 729990b4e2468063d9e4ca534639666403282fac
 if settings.DEBUG:
     urlpatterns.append(path("__debug__/", include("debug_toolbar.urls")))
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # for media-files, not for toolbar
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    # for media-files, not for toolbar
 
----------------------------------------django-humanize(https://docs.djangoproject.com/en/4.2/ref/contrib/humanize/):
-----in settings.py----
+------------------------------------------------------------------------------------------------------------------------
+<<<<<<< HEAD
+TODO:                   django-humanize(https://docs.djangoproject.com/en/4.2/ref/contrib/humanize/)
+=======
+                        django-humanize(https://docs.djangoproject.com/en/4.2/ref/contrib/humanize/)
+>>>>>>> 729990b4e2468063d9e4ca534639666403282fac
+------------------------------------------------------------------------------------------------------------------------
+----in settings.py--------------
 INSTALLED_APPS = [
-    ...,
     'django.contrib.humanize',
-    ...
 ]
 
-----in template----
+----in template------
 {% load humanize %}
 
----------------------------------------Stripe:
+------------------------------------------------------------------------------------------------------------------------
+<<<<<<< HEAD
+TODO:                                                    Stripe
+=======
+                                                         Stripe
+>>>>>>> 729990b4e2468063d9e4ca534639666403282fac
+------------------------------------------------------------------------------------------------------------------------
 1. Register on official site - stripe.com
 2. Dashboard >> Developers >> API keys >> Publishable key, Secret key
 3. Stripe Docs - https://stripe.com/docs >> Get Started >> Online >> Accept online payments
 
-----in settings.py----
+----in settings.py----------------------
 # Stripe
 STRIPE_PUBLIC_KEY = 'publishable_key'
 STRIPE_SECRET_KEY = 'secret_key'
 
-----in Terminal----
+----in Terminal------
 pip3 install stripe
 
-----in orders.views----
+----in orders.views------------------------------
 import stripe
 from http import HTTPStatus
 
@@ -393,11 +494,230 @@ def post(self, request, *args, **kwargs):
     )
     return HttpResponseRedirect(checkout_session.url, status=HTTPStatus.SEE_OTHER)
 
-----How get answer from Striple - Webhook-------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+<<<<<<< HEAD
+TODO:                                 Webhook - How get answer from Striple
+------------------------------------------------------------------------------------------------------------------------
+1. Fulfillment an end of page >> make as showed(Download Striple CLI, ...) - \
+                             https://stripe.com/docs/payments/checkout/fulfill-orders
+=======
+                                      Webhook - How get answer from Striple
+------------------------------------------------------------------------------------------------------------------------
 1. Fulfillment an end of page >> make as showed(Download Striple CLI, ...) - \
                                                                 https://stripe.com/docs/payments/checkout/fulfill-orders
-----in settings.py----
+>>>>>>> 729990b4e2468063d9e4ca534639666403282fac
+----in settings.py--------------------------------------------------------------------------------
 STRIPE_WEBHOOK_SECRET = 'whsec_edcf5cd984acd15023a1c4771331abf828dde08fc95738e0af9a0e5ae7080f3d'
 
-----in Terminal(after all steps)----
+----in Terminal(after all steps)----------------------------
 stripe listen --forward-to 127.0.0.1:8000/webhook/stripe/
+
+----in view---------------------------------------------------------
+@csrf_exempt
+def stripe_webhook_view(request):
+    payload = request.body
+    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    event = None
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, settings.STRIPE_WEBHOOK_SECRET
+        )
+    except ValueError as e:
+        # Invalid payload
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        return HttpResponse(status=400)
+
+    # Handle the checkout.session.completed event
+    if event['type'] == 'checkout.session.completed':
+        # Retrieve the session. If you require line items in the response, you may include them by expanding line_items.
+        session = stripe.checkout.Session.retrieve(
+            event['data']['object']['id'],
+            expand=['line_items'],
+        )
+
+        line_items = session.line_items
+        # Fulfill the purchase...
+        fulfill_order(line_items)
+
+    # Passed signature verification
+    return HttpResponse(status=200)
+
+def fulfill_order(session):
+<<<<<<< HEAD
+  # fill me
+  print("Fulfilling order")
+
+TODO:-------------------------------------------------------------------------------------------------------------------
+TODO:                   THIS DOCUMENTATION MAY BE OLD, NEW INSTRUCTIONS ALWAYS HAVE ON SITE
+TODO:-------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TODO:--------------------------------------------------FIXING BAGS------------------------------------------------------
+########################################################################################################################
+########################################################################################################################
+######################################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$#####################################
+#####################################$ THIS WILL BE PLACED BAGS AND THEIR SOLUTION $####################################
+######################################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$#####################################
+########################################################################################################################
+########################################################################################################################
+------------------------------------------------------------------------------------------------------------------------
+TODO:                                                 Python Console
+------------------------------------------------------------------------------------------------------------------------
+[ERROR]
+django.core.exceptions.ImproperlyConfigured: Requested setting INSTALLED_APPS, but settings are not configured.\
+                                        You must either define the environment variable DJANGO_SETTINGS_MODULE \
+                                        or call settings.configure() before accessing settings.
+[FIXING]
+1) mark proj(auto-added-dir) as source
+2) In Python Console: from proj import wsgi
+
+------------------------------------------------------------------------------------------------------------------------
+TODO:                                                    Tests.py
+------------------------------------------------------------------------------------------------------------------------
+[ERROR]
+django.core.exceptions.ImproperlyConfigured: Requested setting INSTALLED_APPS, but settings are not configured.\
+                                        You must either define the environment variable DJANGO_SETTINGS_MODULE \
+                                        or call settings.configure() before accessing settings.
+[FIXING]
+import os  # for correctly work
+
+import django  # for correctly work
+
+if 'env setting':  # for correctly work
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'store.settings')
+    django.setup()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TODO:--------------------------------------------------SETTINGS.py------------------------------------------------------
+########################################################################################################################
+########################################################################################################################
+######################################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$#####################################
+#####################################$ THIS WILL BE PLACED SOME SETTINGS FOR PROJT $####################################
+######################################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$#####################################
+########################################################################################################################
+########################################################################################################################
+------------------------------------------------------------------------------------------------------------------------
+TODO:                                                    MEDIA
+------------------------------------------------------------------------------------------------------------------------
+----in settings------------------
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+----in template-----------------------
+<form enctype="multipart/form-data">
+<img scr="{{ user.image.url }}">
+
+----in store/urls.py------------------------
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [...] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+------------------------------------------------------------------------------------------------------------------------
+TODO:                                                    USER
+------------------------------------------------------------------------------------------------------------------------
+----in settings----------------
+AUTH_USER_MODEL = 'users.User'  # if you use a self model of User
+LOGIN_URL = '/users/login/ '  # needs for permission decorator
+LOGIN_REDIRECT_URL = '/'  # needs for LoginView
+LOGOUT_REDIRECT_URL = '/'  # needs for LogoutView
+
+------------------------------------------------------------------------------------------------------------------------
+TODO:                                                   STATIC
+------------------------------------------------------------------------------------------------------------------------
+----in settings-----------
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+=======
+  # TODO: fill me in
+  print("Fulfilling order")
+
+------------------------------------------------------------------------------------------------------------------------
+                        THIS DOCUMENTATION MAY BE OLD, NEW INSTRUCTIONS ALWAYS HAVE ON SITE
+------------------------------------------------------------------------------------------------------------------------
+>>>>>>> 729990b4e2468063d9e4ca534639666403282fac
