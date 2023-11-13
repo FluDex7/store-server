@@ -10,7 +10,7 @@ admin.site.register(ProductCategory)
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'price', 'quantity', 'category')  # Отображение объектов
-    fields = ('name', 'description', ('price', 'quantity'), 'stripe_product_price_id', 'image', 'category')  # Отображение объекта
+    fields = ('name', 'description', ('price', 'quantity'), 'stripe_product_price_id', 'image', 'category')
     # readonly_fields = ('description',)
     search_fields = ('name',)  # Поиск по имени
     ordering = ('name',)  # Сортировка по алфавитному порядку -name для обратному отображению
