@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse, reverse_lazy
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
+from django.views.generic.list import ListView
 from django.views.decorators.csrf import csrf_exempt
 
 from common.views import TitleMixin
@@ -23,6 +24,17 @@ class SuccessTemplateView(TitleMixin, TemplateView):
 
 class CanceledTemplateView(TemplateView):
     template_name = 'orders/cancelled.html'
+
+
+class OrderListView(TitleMixin, ListView):
+    template_name = 'orders/orders.html'
+    title = 'Store - Заказы'
+    queryset = Order.objects.all()
+    ordering = ('-id',)
+
+    def get_queryset(self):
+        queryset = super(OrderListView, self).get_queryset()
+        return queryset.filter(initiator=self.request.user)
 
 
 class OrderCreateView(TitleMixin, CreateView):
