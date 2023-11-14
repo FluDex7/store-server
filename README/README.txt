@@ -112,6 +112,7 @@ QuerrySet - набор запросов, который представляет
     +redis-cli
     +sudo su postgres +psql
     +celery -A store worker -l INFO
+    stripe listen --forward-to 127.0.0.1:8000/webhook/stripe/
     and django-server
 
 11. Платёжные системы: Paypal, Stripe, IO
