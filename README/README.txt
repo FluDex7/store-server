@@ -145,6 +145,105 @@ FileZilla - Ctrl+S - NewSite - SFTP(SSH File Transfer Protocol) - ip(buyed VDS-s
 
 static settings > python manage.py collectstatic > runserver 0.0.0.0:8000 (ip:8000 for join to site)
 
+
+----GUNICORN----
+https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-18-04-ru#systemd-gunicorn
+
+pip install gunicorn
+
+sudo nano /etc/systemd/system/gunicorn.socket
+'''
+[Unit]
+Description=gunicorn socket
+
+[Socket]
+ListenStream=/run/gunicorn.sock
+
+[Install]
+WantedBy=sockets.target
+'''
+
+sudo nano /etc/systemd/system/gunicorn.service
+'''
+[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+User=fdx
+Group=www-data
+WorkingDirectory=/home/fdx/store-server/store
+ExecStart=/home/fdx/store-server/venv/bin/gunicorn \
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/gunicorn.sock \
+          store.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
+'''
+
+sudo systemctl start gunicorn.socket
+sudo systemctl enable gunicorn.socket
+if error:
+    sudo nano /etc/hosts
+    '''
+    127.0.0.1       localhost store-server (must be)
+    '''
+
+sudo systemctl status gunicorn.socket (active)
+sudo systemctl status gunicorn
+
+if errors:
+    sudo journalctl -u gunicorn (here will be logs)
+if update and need to save:
+    sudo systemctl daemon-reload
+    sudo systemctl restart gunicorn
+
+----nginx----
+https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-18-04-ru#nginx-gunicorn
+
+sudo apt install nginx
+sudo nano /etc/nginx/sites-available/store
+'''
+server {
+    listen 80;
+    server_name 77.223.98.200;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root /home/fdx/store-server/store;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/run/gunicorn.sock;
+    }
+}
+'''
+sudo ln -s /etc/nginx/sites-available/store /etc/nginx/sites-enabled
+sudo nginx -t (ok)
+sudo systemctl restart nginx
+
+----redis----
+https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-22-04
+
+sudo apt install redis-server
+sudo nano /etc/redis/redis.conf
+'''
+supervised systemd
+'''
+
+sudo systemctl restart redis.service
+sudo systemctl status redis
+
 TODO:------------------------------------------------APPS & MODULES-----------------------------------------------------
 ########################################################################################################################
 ########################################################################################################################
