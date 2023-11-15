@@ -117,6 +117,32 @@ QuerrySet - набор запросов, который представляет
 
 11. Платёжные системы: Paypal, Stripe, IO
 
+12. Создание нового пользователя на купленном сервере (и последующие шаги деплоя - \
+        (https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-22-04)
+
+adduser username
+usermod -aG username www-data
+(close terminal and login with new user) ssh username@ip
+
+https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-22-04
+sudo apt update
+sudo apt install postgresql postgresql-contrib
+sudo -u postgres psql
+
+CREATE DATABASE store_db_production;
+CREATE ROLE store_username_production with password 'store_password_production';
+ALTER ROLE "store_username_production" WITH LOGIN;
+GRANT ALL PRIVILEGES ON DATABASE "store_db_production" to store_username_production;
+ALTER USER store_username_production CREATEDB;
+\q
+
+sudo apt install python3-venv
+python3 -m venv venv
+source venv/bin/activate
+
+FileZilla - Ctrl+S - NewSite - SFTP(SSH File Transfer Protocol) - ip(buyed VDS-server) > host - user(new) & password >
+> connect > mkdir store > перенос файлов(кроме медиа, влючая окружение, флэйки, зависимости) > migrate
+
 TODO:------------------------------------------------APPS & MODULES-----------------------------------------------------
 ########################################################################################################################
 ########################################################################################################################
