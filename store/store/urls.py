@@ -13,16 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf import \
-    settings  # Так подтягиваются все настройки (в отличие от from store import settings)
+from django.conf import settings
+# Так подтягиваются все настройки (в отличие от from store import settings)
 # Подключение медиа-файлов
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
 from orders.views import stripe_webhook_view
-from products.views import \
-    IndexView  # Подключение контроллеров файла views.py приложения products
+from products.views import IndexView
+# Подключение контроллеров файла views.py приложения products
 
 urlpatterns = [
     path('admin/', admin.site.urls),
