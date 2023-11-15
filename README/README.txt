@@ -143,6 +143,8 @@ source venv/bin/activate
 FileZilla - Ctrl+S - NewSite - SFTP(SSH File Transfer Protocol) - ip(buyed VDS-server) > host - user(new) & password >
 > connect > mkdir store > перенос файлов(кроме медиа, влючая окружение, флэйки, зависимости) > migrate
 
+static settings > python manage.py collectstatic > runserver 0.0.0.0:8000 (ip:8000 for join to site)
+
 TODO:------------------------------------------------APPS & MODULES-----------------------------------------------------
 ########################################################################################################################
 ########################################################################################################################
