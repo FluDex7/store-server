@@ -244,6 +244,29 @@ supervised systemd
 sudo systemctl restart redis.service
 sudo systemctl status redis
 
+----celery----
+https://docs.celeryq.dev/en/stable/userguide/daemonizing.html#usage-systemd
+
+sudo nano /etc/systemd/system/celery.service
+'''
+[Unit]
+Description=Celery Service
+After=network.target
+
+[Service]
+User=fdx
+Group=www-data
+WorkingDirectory=/home/fdx/store-server/store
+ExecStart=/home/fdx/store-server/venv/bin/celery -A store worker -l INFO
+
+[Install]
+WantedBy=multi-user.target
+'''
+
+sudo systemctl enable celery
+sudo systemctl start celery
+sudo systemctl status celery
+
 TODO:------------------------------------------------APPS & MODULES-----------------------------------------------------
 ########################################################################################################################
 ########################################################################################################################
