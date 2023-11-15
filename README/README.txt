@@ -267,6 +267,17 @@ sudo systemctl enable celery
 sudo systemctl start celery
 sudo systemctl status celery
 
+----Firewall UFW----
+https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-22-04#step-4-setting-up-a-firewall
+
+sudo apt install ufw
+sudo ufw app list (OpenSSH need to install while you authoticated how fdx, else you'll can't to connect with this user)
+
+sudo ufw allow OpenSSH
+sudo ufw allow 'Nginx Full'
+sudo ufw enable
+sudo ufw status
+
 TODO:------------------------------------------------APPS & MODULES-----------------------------------------------------
 ########################################################################################################################
 ########################################################################################################################
