@@ -293,6 +293,15 @@ sudo systemctl restart gunicorn
 sudo systemctl restart celery
 (check status)
 
+----https----
+https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-22-04
+
+sudo snap install core; sudo snap refresh core
+sudo snap install --classic certbot
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+sudo certbot --nginx -d store-server-fludex.ru
+sudo systemctl restart nginx; sudo systemctl restart gunicorn; sudo systemctl restart celery
+
 TODO:------------------------------------------------APPS & MODULES-----------------------------------------------------
 ########################################################################################################################
 ########################################################################################################################
