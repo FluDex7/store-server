@@ -278,6 +278,21 @@ sudo ufw allow 'Nginx Full'
 sudo ufw enable
 sudo ufw status
 
+----buying domain----
+https://www.reg.ru/buy/domains/?query=store-server-prod.ru&_csrf=54ab6447aa3b2cf0cc91c07208c38fd9
+
+after buying > VDS domains > add new
+click to domain(reg.ru) > DNS Servers and zones > free DNS-servers Рег.ру > self list of servers > ns1,2 < DNS Domain
+
+sudo nano /etc/nginx/sites-available/store
+server_name store-server-fludex.ru;
+
+sudo systemctl restart nginx
+sudo nginx -t (ok)
+sudo systemctl restart gunicorn
+sudo systemctl restart celery
+(check status)
+
 TODO:------------------------------------------------APPS & MODULES-----------------------------------------------------
 ########################################################################################################################
 ########################################################################################################################
