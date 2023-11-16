@@ -117,7 +117,19 @@ QuerrySet - набор запросов, который представляет
 
 11. Платёжные системы: Paypal, Stripe, IO
 
-12. Создание нового пользователя на купленном сервере (и последующие шаги деплоя - \
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------
+TODO:                                                     DEPLOY
+------------------------------------------------------------------------------------------------------------------------
         (https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-22-04)
 
 adduser username
@@ -301,6 +313,38 @@ sudo snap install --classic certbot
 sudo ln -s /snap/bin/certbot /usr/bin/certbot
 sudo certbot --nginx -d store-server-fludex.ru
 sudo systemctl restart nginx; sudo systemctl restart gunicorn; sudo systemctl restart celery
+sudo systemctl restart nginx; sudo systemctl restart gunicorn; sudo systemctl restart redis; sudo systemctl restart celery;
+
+----last steps----
+python manage.py createsuperuser
+python manage.py loaddata products/fixtures/Categories.json
+python manage.py loaddata products/fixtures/Products.json
+
+sudo nano /etc/nginx/sites-enabled/store (if media not working)
+'''
+location /media/ {
+        root /home/fdx/store-server/store;
+    }
+'''
+
+*fix OAuth*
+
+----webhook to production----
+https://stripe.com/docs/payments/checkout/fulfill-orders#go-live
+
+webhooks page > add an endpoint > endpoint url < https://store-server-fludex.ru/webhook/stripe/, select events < \
+    Checkout.session.completed < add
+Signing secret > nano .env > stripe_webhook_secret
+*restart*
+*add to every product price_id*
+
+
+
+
+
+
+
+
 
 TODO:------------------------------------------------APPS & MODULES-----------------------------------------------------
 ########################################################################################################################
