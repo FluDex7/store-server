@@ -133,7 +133,8 @@ TODO:                                                     DEPLOY
         (https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-22-04)
 
 adduser username
-usermod -aG username www-data
+usermod -aG sudo username
+usermod -a -G username www-data
 (close terminal and login with new user) ssh username@ip
 
 https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-22-04
