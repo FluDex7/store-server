@@ -383,11 +383,11 @@ TODO:                                                  PostgreSQL
 +sudo su postgres
 +psql - these commands also needs for launch server(+\c store_db)
 
-+CREATE DATABASE db_name;
-+CREATE ROLE name with password 'password';
-+ALTER ROLE "name" WITH LOGIN;
-+GRANT ALL PRIVILEGES ON DATABASE "db_name" TO name;
-+ALTER USER name CREATEDB;
++CREATE DATABASE databasename;
++CREATE ROLE username with password 'password';
++ALTER ROLE "username" WITH LOGIN;
++GRANT ALL PRIVILEGES ON DATABASE "databasename" TO username;
++ALTER USER username CREATEDB;
 +ALTER USER username WITH SUPERUSER;
 
 ----in Terminal-----------
@@ -413,6 +413,8 @@ TODO:                                                  PostgreSQL
 
 ----LOGIN WITH USER----------------------------------------------
 +psql -U username -d databasename -h localhost
+username: str with small letters
+databasename: str with small letters
 
 ------------------------------------------------------------------------------------------------------------------------
 TODO:                                                    Redis
