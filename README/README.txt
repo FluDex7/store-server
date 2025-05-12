@@ -822,8 +822,29 @@ root@<info>:/home/<need_place># pg_dump -U postgres <database> >> db.sql
 
 вернуть настройки конфигурации к предыдущим значениям
 
+------------------
+Дамб базы с сервера на сервер
+------------------
+открыть конфигурацию и изменить поля, где вначале стоит locale с peer на trust
+[ИЛИ] nano /etc/postgresql/<версия>/main/pg_hba.conf
+[ИЛИ] nano /var/lib/pgsql/<версия>/data/pg_hba.conf
 
+Потом изменить listen_addresses с "localhost" на "*".  Это позволит серверу слушать на всех интерфейсах.
+nano /etc/postgresql/14/main/postgresql.conf
 
+Перезапустить сервис postgres
+sudo systemctl restart postgresql
+
+Проверка брандмауэра
+Убедитесь, что брандмауэр на удаленном сервере не блокирует порты. На большинстве систем с Linux можно использовать ufw:
+sudo ufw status
+
+Если порт 5432 закрыт, откройте его:
+sudo ufw allow 5432
+
+psql -h <ip> -U postgres <database> > db.sql
+
+Потом как можно быстрее вернуть предыдущие изменения в конфигурации
 
 
 
