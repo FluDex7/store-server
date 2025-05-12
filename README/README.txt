@@ -828,6 +828,10 @@ root@<info>:/home/<need_place># pg_dump -U postgres <database> >> db.sql
 открыть конфигурацию и изменить поля, где вначале стоит host с peer на trust
 [ИЛИ] nano /etc/postgresql/<версия>/main/pg_hba.conf
 [ИЛИ] nano /var/lib/pgsql/<версия>/data/pg_hba.conf
+БЫЛО:
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            scram-sha-256
+СТАЛО:
 host    all             all             0.0.0.0/0            trust
 
 Потом изменить listen_addresses с "localhost" на "*".  Это позволит серверу слушать на всех интерфейсах.
