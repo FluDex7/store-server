@@ -796,7 +796,7 @@ TODO:                                        postgresql encoding LATIN1
 localectl status
 Покажет локализацию устройства, если заканчивается на .UTF-8 то всё ок.
 Если нет то пробуйте обновить.
-update-locale LANG=ru_RU.UTF-8
+update-locale LANG=en_US.UTF-8
 Если выходит ошибка invalid locale settings то обновите всю ОС
 В убунту/дебиан такая команда
 apt upgrade
