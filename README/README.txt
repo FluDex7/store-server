@@ -825,9 +825,10 @@ root@<info>:/home/<need_place># pg_dump -U postgres <database> >> db.sql
 ------------------
 Дамб базы с сервера на сервер
 ------------------
-открыть конфигурацию и изменить поля, где вначале стоит locale с peer на trust
+открыть конфигурацию и изменить поля, где вначале стоит host с peer на trust
 [ИЛИ] nano /etc/postgresql/<версия>/main/pg_hba.conf
 [ИЛИ] nano /var/lib/pgsql/<версия>/data/pg_hba.conf
+host    all             all             0.0.0.0/0            trust
 
 Потом изменить listen_addresses с "localhost" на "*".  Это позволит серверу слушать на всех интерфейсах.
 nano /etc/postgresql/14/main/postgresql.conf
