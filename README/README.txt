@@ -847,7 +847,7 @@ sudo ufw status
 Если порт 5432 закрыт, откройте его:
 sudo ufw allow 5432
 
-psql -h <ip> -U postgres <database> > db.sql
+sudo pg_dump -h <ip> -U postgres <database> >> bd.sql
 
 Потом как можно быстрее вернуть предыдущие изменения в конфигурации
 
