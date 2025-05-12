@@ -807,14 +807,20 @@ sudo -i -u postgres psql
 и отправьте такую команду
 UPDATE pg_database SET encoding = pg_char_to_encoding('UTF8');
 
+-----------------------------------------------------------------------------------------------------------------------
+TODO:                                        postgresql pg_dump error: permissions denied
+-----------------------------------------------------------------------------------------------------------------------
+открыть конфигурацию и изменить поля, где вначале стоит locale с peer на trust
+[ИЛИ] nano /etc/postgresql/<версия>/main/pg_hba.conf
+[ИЛИ] nano /var/lib/pgsql/<версия>/data/pg_hba.conf
 
+Перезапустить сервис postgres
+sudo systemctl restart postgresql
 
+Произвести дамп базы 
+root@<info>:/home/<need_place># pg_dump -U postgres <database> >> db.sql
 
-
-
-
-
-
+вернуть настройки конфигурации к предыдущим значениям
 
 
 
