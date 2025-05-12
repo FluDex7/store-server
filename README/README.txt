@@ -851,9 +851,27 @@ sudo pg_dump -h <ip> -U postgres <database> >> bd.sql
 
 Потом как можно быстрее вернуть предыдущие изменения в конфигурации
 
+-------
+Восстановление базы данных
+-------
+Для начала создаем базу, которая у нас в дампе
++CREATE DATABASE databasename;
++CREATE ROLE username with password 'password';
++ALTER ROLE "username" WITH LOGIN;
++GRANT ALL PRIVILEGES ON DATABASE "databasename" TO username;
++ALTER USER username CREATEDB;
++ALTER USER username WITH SUPERUSER;
 
+Выходим из postgres и меняем в файле конфигурации везде где вначале стоит locale поле peer на trust
++sudo nano /etc/postgresql/<версия>/main/pg_hba.conf
 
+Перезапускаем сервис
++sudo systemctl restart postgresql
 
+Загружаем базу
+bogdan@<info>:~$ sudo psql -U postgres <database> < bd.sql
+
+Возвращаем настройки конфигурации
 
 
 
