@@ -808,6 +808,17 @@ sudo -i -u postgres psql
 UPDATE pg_database SET encoding = pg_char_to_encoding('UTF8');
 
 -----------------------------------------------------------------------------------------------------------------------
+TODO:                        UnicodeEncodeError: 'latin-1' codec can't encode characters in position 0-2
+-----------------------------------------------------------------------------------------------------------------------
+nano /root/.bashrc
+ADD NEXT:
+export LANG=C.UTF-8
+export LC_ALL=C.UTF-8
+
+затем обновить
+source /root/.bashrc
+
+-----------------------------------------------------------------------------------------------------------------------
 TODO:                                        postgresql pg_dump error: permissions denied
 -----------------------------------------------------------------------------------------------------------------------
 открыть конфигурацию и изменить поля, где вначале стоит locale с peer на trust
@@ -948,3 +959,4 @@ if DEBUG:
     )
 else:
     STATIC_ROOT = BASE_DIR / 'static'
+
